@@ -1,25 +1,15 @@
--- King Hub Main Script
+-- KING HUB Main Loader
+local Settings = getgenv().Settings or {
+    JoinTeam = "Pirates",
+    Translator = false
+}
 
-if not Settings then
-    Settings = {
-        JoinTeam = "Pirates",
-        Translator = false
-    }
+local success, response = pcall(function()
+    return game:HttpGet("https://raw.githubusercontent.com/Pixelpv/KINGHUB/main/core.lua")
+end)
+
+if success then
+    loadstring(response)(Settings)
+else
+    warn("[KING HUB] Falha ao carregar o core.")
 end
-
--- Selecionar time
-if Settings.JoinTeam then
-    local args = {
-        [1] = "SetTeam",
-        [2] = Settings.JoinTeam
-    }
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-end
-
--- Tradutor (placeholder)
-if Settings.Translator == true then
-    print("🌐 Tradutor ativado - (você pode adicionar tradução automática aqui)")
-end
-
--- Carregar UI
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SeuUsuario/KINGHUB/main/ui.lua"))()
