@@ -1,19 +1,37 @@
-
-local Info = {}
-
-Info.Name = "99 Nights in the Forest"
-Info.Version = "1.0.0"
-Info.Author = "Pixel & Team"
-Info.Discord = "https://discord.gg/seulinkdiscord"
-Info.GitHub = "https://github.com/Pixelpv/KINGHUB"
-
-function Info:ShowInfo()
-    print("=== KINGHUB - " .. self.Name .. " ===")
-    print("Version: " .. self.Version)
-    print("Author: " .. self.Author)
-    print("Discord: " .. self.Discord)
-    print("GitHub: " .. self.GitHub)
-    print("=============================")
+return function(tab)
+    local Paragraph = tab:AddParagraph({
+        Title = "KingHub for 99 Nights in the Forest",
+        Content = "A specialized script hub designed specifically for 99 Nights in the Forest. All features work in private instances without affecting other players."
+    })
+    
+    tab:AddParagraph({
+        Title = "Disclaimer",
+        Content = "Use responsibly. The authors are not responsible for any issues caused by misuse."
+    })
+    
+    local DiscordButton = tab:AddButton({
+        Title = "Join Discord",
+        Description = "Get support and updates",
+        Callback = function()
+            setclipboard("https://discord.gg/example")
+        end
+    })
+    
+    local GitHubButton = tab:AddButton({
+        Title = "GitHub Repository",
+        Description = "View source code and contribute",
+        Callback = function()
+            setclipboard("https://github.com/Pixelpv/KINGHUB")
+        end
+    })
+    
+    tab:AddParagraph({
+        Title = "Version",
+        Content = "1.0.0"
+    })
+    
+    tab:AddParagraph({
+        Title = "Author",
+        Content = "YourName"
+    })
 end
-
-return Info
