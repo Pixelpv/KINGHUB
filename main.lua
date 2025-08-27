@@ -1,15 +1,16 @@
--- Inicializador do hub
+-- main.lua
+local function import(file)
+    local url = "https://raw.githubusercontent.com/Pixelpv/KingHUBnt/main/" .. file
+    return loadstring(game:HttpGet(url))()
+end
 
-print("KingHub inicializado!")
+-- espera PlayerGui carregar (mobile friendly)
+local player = game.Players.LocalPlayer
+while not player or not player:FindFirstChild("PlayerGui") do
+    task.wait(0.1)
+end
+task.wait(1)
 
--- Carrega módulos principais
-local ui = require("ui")
-local coreLoader = require("core/loader")
-local security = require("core/security")
-
--- Exemplo de inicialização
-security.startProtections()
-ui.init()
-coreLoader.loadSelectedGame()
-
-print("Hub pronto para uso.")
+-- importa UI
+local UI = import("ui.lua")
+UI:Init(player.PlayerGui)
