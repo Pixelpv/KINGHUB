@@ -1,5 +1,5 @@
 -- ui.lua
-local FluentLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixelpv/KingHUBnt/main/libs/fluent.lua"))()
+local FluentLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixelpv/KINGHUB/main/libs/fluent.lua"))()
 
 local Loader = require(script.Parent.core.loader)
 
