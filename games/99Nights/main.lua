@@ -1,38 +1,64 @@
-local Main = {}
-local Info = require(script.Parent.info)
-
-function Main:Init(MainWindow)
-    -- Cria todas as abas na ordem correta
-    local InfoTab = MainWindow:NewTab("Info")
-    local MainTab = MainWindow:NewTab("Main")
-    local BringTab = MainWindow:NewTab("Bring")
-    local AutoFarmTab = MainWindow:NewTab("Auto Farm")
-    local VisualsTab = MainWindow:NewTab("Visuals")
-    local SettingsTab = MainWindow:NewTab("Settings")
-
-    -- Aba Info (abre por padrão)
-    InfoTab:AddParagraph({
-        Title = "KINGHUB - " .. Info.Name,
-        Content = "Version: " .. Info.Version ..
-                  "\nAuthor: " .. Info.Author ..
-                  "\nDiscord: " .. Info.Discord ..
-                  "\nGitHub: " .. Info.GitHub
-    })
-    InfoTab:AddButton({
-        Title = "Show in Console",
-        Callback = function()
-            Info:ShowInfo()
+return function(tab)
+    -- Player section
+    tab:AddSection("Player")
+    
+    local WalkSpeedSlider = tab:AddSlider("WalkSpeedSlider", {
+        Title = "Walk Speed",
+        Description = "Adjust your movement speed",
+        Default = 16,
+        Min = 16,
+        Max = 100,
+        Rounding = 0,
+        Callback = function(value)
+            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.WalkSpeed = value
+            end
         end
     })
-
-    MainWindow:SelectTab(InfoTab)
-
-    -- Abas de teste para exemplo
-    MainTab:AddButton({Title = "Test Main", Callback = function() print("Main tab working") end})
-    BringTab:AddButton({Title = "Test Bring", Callback = function() print("Bring tab working") end})
-    AutoFarmTab:AddButton({Title = "Test Auto Farm", Callback = function() print("Auto Farm working") end})
-    VisualsTab:AddButton({Title = "Test Visuals", Callback = function() print("Visuals working") end})
-    SettingsTab:AddButton({Title = "Test Settings", Callback = function() print("Settings working") end})
+    
+    local JumpPowerSlider = tab:AddSlider("JumpPowerSlider", {
+        Title = "Jump Power",
+        Description = "Adjust your jump height",
+        Default = 50,
+        Min = 50,
+        Max = 200,
+        Rounding = 0,
+        Callback = function(value)
+            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.JumpPower = value
+            end
+        end
+    })
+    
+    -- Game section
+    tab:AddSection("Game")
+    
+    local InfMoneyToggle = tab:AddToggle("InfMoneyToggle", {
+        Title = "Infinite Money",
+        Description = "Gain unlimited currency",
+        Default = false,
+        Callback = function(value)
+            -- Implementation for infinite money
+        end
+    })
+    
+    local NoClipToggle = tab:AddToggle("NoClipToggle", {
+        Title = "NoClip",
+        Description = "Walk through walls",
+        Default = false,
+        Callback = function(value)
+            -- Implementation for noclip
+        end
+    })
+    
+    local GodModeToggle = tab:AddToggle("GodModeToggle", {
+        Title = "God Mode",
+        Description = "Become invincible",
+        Default = false,
+        Callback = function(value)
+            -- Implementation for god mode
+        end
+    })
 end
-
-return Main
