@@ -1,18 +1,29 @@
-# KingHub
+# KingHub - 99 Nights in the Forest
 
-Hub modular para jogos, com suporte a Fluent UI, carregamento dinâmico de jogos e sistema de proteções.
+A specialized script hub designed specifically for the Roblox game "99 Nights in the Forest".
 
-## Estrutura
+## Features
 
-- `main.lua` — Inicializador do hub.
-- `ui.lua` — Interface utilizando Fluent UI.
-- `core/` — Núcleo do sistema (carregamento, segurança, utilidades).
-- `games/99Nights/` — Scripts específicos do jogo 99Nights.
-- `libs/fluent.lua` — Biblioteca local de Fluent UI.
+- **Modular Design**: Easy to maintain and extend
+- **Mobile Compatible**: Works on Delta and other mobile executors
+- **Private Instances**: All features work without affecting other players
+- **Fluent UI**: Modern, customizable interface
 
-## Como usar
+## Installation
 
-1. Execute `main.lua` para iniciar o hub.
-2. O sistema irá carregar a interface, aplicar proteções e aguardar seleção de jogos.
+1. Download the latest release
+2. Extract to your executor's workspace folder
+3. Execute the `main.lua` file
 
----
+## Modules
+
+- **Info**: General information and links
+- **Main**: Core game functions
+- **Bring**: Teleportation features
+- **Auto Farm**: Automated resource collection
+- **Visuals**: Visual enhancements and ESP
+- **Settings**: Configuration and preferences
+
+## Disclaimer
+
+This software is provided for educational purposes only. Use at your own risk.
