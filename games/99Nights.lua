@@ -1,22 +1,25 @@
--- KINGHUB - 99 Nights in the Forest
--- Apenas Tab "Info"
+-- KINGHUB 99 Nights - Fluent UI (Aba Info)
+if not game:IsLoaded() then game.Loaded:Wait() end
 
-local Library = {}
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
--- Criar GUI estilo Fluent (simples por enquanto)
-function Library:CreateWindow(title)
+-- Função para criar janela Fluent
+local function CreateFluentWindow(title)
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "KINGHUB_UI"
     ScreenGui.ResetOnSpawn = false
     ScreenGui.Parent = game:GetService("CoreGui")
 
     local Frame = Instance.new("Frame")
-    Frame.Size = UDim2.new(0, 400, 0, 250)
-    Frame.Position = UDim2.new(0.5, -200, 0.5, -125)
+    Frame.Size = UDim2.new(0, 420, 0, 260)
+    Frame.Position = UDim2.new(0.5, -210, 0.5, -130)
     Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     Frame.BorderSizePixel = 0
     Frame.Parent = ScreenGui
+    Frame.ClipsDescendants = true
 
+    -- Title Bar
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 40)
     Title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
@@ -26,14 +29,18 @@ function Library:CreateWindow(title)
     Title.TextSize = 18
     Title.Parent = Frame
 
+    -- Rounded corners (Fluent style)
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 10)
+    UICorner.Parent = Frame
+
     return Frame
 end
 
-local InfoTab = {}
-
-function InfoTab:Init()
-    local window = Library:CreateWindow("KingHub - 99 Nights")
-
+-- Aba Info
+local function InfoTab()
+    local window = CreateFluentWindow("KingHub - 99 Nights")
+    
     local Info = Instance.new("TextLabel")
     Info.Size = UDim2.new(1, -20, 1, -60)
     Info.Position = UDim2.new(0, 10, 0, 50)
@@ -49,14 +56,9 @@ Version: 1.0
 Author: Pixelpv
 Discord: discord.gg/xxxxx
 GitHub: github.com/Pixelpv/KINGHUB
-    ]]
+]]
     Info.Parent = window
 end
 
-local Module = {}
-
-function Module.Init()
-    InfoTab:Init()
-end
-
-return Module
+-- Inicia GUI
+InfoTab()
