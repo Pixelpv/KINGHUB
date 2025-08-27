@@ -1,16 +1,21 @@
--- Cria interface Fluent UI
+-- ui.lua
+local FluentLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixelpv/KingHUBnt/main/libs/fluent.lua"))()
 
-local fluent = require("libs/fluent")
+local Loader = require(script.Parent.core.loader)
 
 local UI = {}
+local MainWindow
 
-function UI.init()
-    print("[UI] Inicializando Fluent UI...")
-    fluent.createWindow("KingHub", {
-        width = 600,
-        height = 400,
-        theme = "dark"
+function UI:Init(PlayerGui)
+    -- cria janela principal Fluent UI
+    MainWindow = FluentLib:CreateWindow({
+        Name = "KingHub - 99 Nights",
+        Parent = PlayerGui,
+        IntroText = "Bem-vindo ao KingHub!"
     })
+
+    -- chama o loader do jogo 99 Nights
+    Loader:LoadGame("99Nights", MainWindow)
 end
 
 return UI
