@@ -4,12 +4,16 @@ local function import(file)
     return loadstring(game:HttpGet(url))()
 end
 
+-- Espera o PlayerGui estar disponível
 local player = game.Players.LocalPlayer
 while not player or not player:FindFirstChild("PlayerGui") do
     task.wait(0.1)
 end
+local PlayerGui = player.PlayerGui
+
+-- Pequena espera extra para garantir estabilidade
 task.wait(1)
 
--- importa UI e inicializa
+-- importa e inicializa UI
 local UI = import("ui.lua")
-UI:Init(player.PlayerGui)
+UI:Init(PlayerGui)
