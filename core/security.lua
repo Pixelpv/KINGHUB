@@ -1,43 +1,44 @@
--- core/security.lua
 local Security = {}
-local Utils = loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixelpv/KINGHUB/main/core/utils.lua"))()
 
--- Protege contra erros inesperados
-function Security:SafeCall(func, ...)
-    local args = {...}
-    local ok, result = pcall(function()
-        return func(unpack(args))
-    end)
-    if not ok then
-        Utils:Warn("Erro capturado: " .. tostring(result))
+function Security.initialize()
+    -- Basic anti-cheat detection
+    if not Security.safeEnvironment() then
+        return false
     end
-    return ok, result
+    
+    -- Game-specific checks
+    if not Security.isCorrectGame() then
+        warn("KingHub: This script is designed specifically for 99 Nights in the Forest")
+        return false
+    end
+    
+    return true
 end
 
--- Protege contra loops infinitos (timeout em segundos)
-function Security:Timeout(func, timeout)
-    local finished = false
-    local result
+function Security.safeEnvironment()
+    -- Check if we're in a supported executor
+    if not is_sirhurt_closure and syn and not pebc_execute then
+        return true
+    end
+    
+    -- Add more checks as needed
+    return true
+end
 
-    task.spawn(function()
-        local ok, res = pcall(func)
-        if ok then
-            result = res
+function Security.isCorrectGame()
+    -- Check if we're in the correct game
+    local gameId = game.GameId
+    local correctGameIds = { -- Add actual game IDs here
+        1234567890 -- Example ID
+    }
+    
+    for _, id in ipairs(correctGameIds) do
+        if gameId == id then
+            return true
         end
-        finished = true
-    end)
-
-    local t = 0
-    while not finished and t < timeout do
-        task.wait(0.1)
-        t += 0.1
     end
-
-    if not finished then
-        Utils:Warn("Timeout atingido em função")
-    end
-
-    return result
+    
+    return false
 end
 
 return Security
