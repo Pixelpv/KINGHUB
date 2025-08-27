@@ -8,7 +8,8 @@ local player = game.Players.LocalPlayer
 while not player or not player:FindFirstChild("PlayerGui") do
     task.wait(0.1)
 end
+task.wait(1)
 
--- inicia UI
+-- importa UI e inicializa
 local UI = import("ui.lua")
 UI:Init(player.PlayerGui)
