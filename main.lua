@@ -1,34 +1,16 @@
--- KINGHUB Main Loader
--- Detecta o jogo e carrega o GUI correspondente
+-- main.lua
 
-local PlaceId = game.PlaceId
-local GameName = game.Name
-
--- Tabela de jogos suportados
 local Games = {
-    [6016359] = "99Nights",   -- Coloque o PlaceId do jogo 99Nights
-    [12345678] = "Outrojogo"  -- Coloque PlaceId do outro jogo
+    [79546208627805] = "99Nights",
+    -- Adicione outros jogos aqui
 }
 
--- Função para carregar script do jogo
-local function LoadGameScript(gameFolder)
-    local scriptPath = ("games/%s/%s.lua"):format(gameFolder, gameFolder)
-    
-    -- Tenta carregar
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SeuUsuario/KINGHUB/main/"..scriptPath))()
-    end)
-    
-    if success then
-        print("[KINGHUB] GUI do jogo "..gameFolder.." carregado com sucesso!")
-    else
-        warn("[KINGHUB] Erro ao carregar GUI de "..gameFolder..": "..tostring(err))
-    end
-end
+local placeId = game.PlaceId
+local gameFolder = Games[placeId]
 
--- Detecta e carrega
-if Games[PlaceId] then
-    LoadGameScript(Games[PlaceId])
+if gameFolder then
+    print("[KINGHUB] Carregando GUI para 99 Nights in the Forest")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SeuUsuario/KINGHUB/main/games/" .. gameFolder .. "/" .. gameFolder .. ".lua"))()
 else
-    warn("[KINGHUB] Jogo não suportado. PlaceId: "..PlaceId.." Nome: "..GameName)
+    warn("[KINGHUB] Jogo não suportado. PlaceId:", placeId)
 end
