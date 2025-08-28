@@ -1,36 +1,77 @@
--- ui.lua (99 Nights in the Forest)
+-- 99Nights.lua (Fluent UI para 99 Nights in the Forest)
 
-local UI = {}
+-- Carregar Fluent UI
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua", true))()
 
-function UI:CreateMain(features)
-    -- Exemplo simples de Fluent UI
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "KingHubUI"
-    ScreenGui.Parent = game:GetService("CoreGui")
+-- Criar janela principal
+local Window = Fluent:CreateWindow({
+    Title = "KINGHUB - 99 Nights",
+    SubTitle = "Mobile Friendly",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(480, 360),
+    Acrylic = true,
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
 
-    local Frame = Instance.new("Frame")
-    Frame.Size = UDim2.new(0, 400, 0, 300)
-    Frame.Position = UDim2.new(0.5, -200, 0.5, -150)
-    Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    Frame.Parent = ScreenGui
+-- Criar aba principal
+local MainTab = Window:AddTab({ Title = "Principal", Icon = "home" })
 
-    local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(1, 0, 0, 40)
-    Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    Title.Text = "KINGHUB - 99 Nights"
-    Title.TextColor3 = Color3.fromRGB(0, 255, 150)
-    Title.Parent = Frame
-
-    -- Botão exemplo
-    local Button = Instance.new("TextButton")
-    Button.Size = UDim2.new(0, 120, 0, 30)
-    Button.Position = UDim2.new(0, 20, 0, 60)
-    Button.Text = "Auto Collect"
-    Button.Parent = Frame
-
-    Button.MouseButton1Click:Connect(function()
-        features.AutoCollect()
-    end)
+-- Funções do jogo
+local Features = {}
+function Features.AutoCollect()
+    -- Aqui você coloca a função real de pegar itens/missões
+    print("Auto Collect iniciado!")
+    Fluent:Notify({
+        Title = "Auto Collect",
+        Content = "Função iniciada!",
+        Duration = 3
+    })
 end
 
-return UI
+-- Botão de Auto Collect
+MainTab:AddButton({
+    Title = "🚀 Auto Collect",
+    Description = "Clique para iniciar",
+    Callback = function()
+        Features.AutoCollect()
+    end
+})
+
+-- Toggle de Sistema
+local toggleStatus = false
+MainTab:AddToggle("AutoToggle", {
+    Title = "🔥 Ativar Auto Collect",
+    Description = "Liga/Desliga a função",
+    Default = false,
+    Callback = function(Value)
+        toggleStatus = Value
+        if Value then
+            Fluent:Notify({ Title = "Ativado", Content = "Auto Collect ON", Duration = 2 })
+        else
+            Fluent:Notify({ Title = "Desativado", Content = "Auto Collect OFF", Duration = 2 })
+        end
+    end
+})
+
+-- Slider de Delay
+MainTab:AddSlider("DelaySlider", {
+    Title = "⏱️ Delay",
+    Description = "Ajusta o intervalo do Auto Collect",
+    Default = 1,
+    Min = 0.1,
+    Max = 5,
+    Rounding = 1,
+    Callback = function(Value)
+        print("Delay setado para: " .. Value .. "s")
+    end
+})
+
+-- Notificação inicial
+Fluent:Notify({
+    Title = "KINGHUB Carregado!",
+    Content = "Fluent UI carregada com sucesso!",
+    Duration = 3
+})
+
+print("Fluent UI 99 Nights pronta!")
